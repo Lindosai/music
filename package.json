@@ -1,0 +1,62 @@
+{
+  "name": "react-ts-music",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "sideEffects": false,
+  "scripts": {
+    "dev": "webpack-dev-server --config config/webpack/webpack.dev.js",
+    "build": "webpack --config config/webpack/webpack.prod.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lindosai/music.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lindosai/music/issues"
+  },
+  "homepage": "https://github.com/Lindosai/music#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.17.10",
+    "@babel/preset-react": "^7.16.7",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
+    "@types/immutable": "^3.8.7",
+    "@types/react": "^18.0.8",
+    "@types/react-dom": "^18.0.3",
+    "@types/react-redux": "^7.1.24",
+    "@types/react-router-config": "^5.0.6",
+    "@types/redux": "^3.6.0",
+    "@types/redux-immutable": "^4.0.3",
+    "@types/redux-thunk": "^2.1.0",
+    "babel-loader": "^8.2.5",
+    "clean-webpack-plugin": "^4.0.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "react-refresh-typescript": "^2.0.4",
+    "terser-webpack-plugin": "^5.3.1",
+    "ts-loader": "^9.2.9",
+    "typescript": "^4.6.4",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1",
+    "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "axios": "^0.27.2",
+    "immutable": "^4.0.0",
+    "normalize.css": "^8.0.1",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-redux": "^8.0.1",
+    "react-router-config": "^5.1.1",
+    "react-router-dom": "^6.3.0",
+    "redux": "^4.2.0",
+    "redux-immutable": "^4.0.0",
+    "redux-thunk": "^2.4.1"
+  }
+}
