@@ -1,7 +1,14 @@
-import * as React from 'react';
+import React, { memo, Suspense } from 'react';
+import { renderRoutes } from 'react-router-config';
+import { BrowserRouter } from 'react-router-dom';
+import routes from '@/router';
 
-export default React.memo(function Main() {
+export default memo(function Main() {
   return (
-    <div>main</div>
-  )
+    <BrowserRouter>
+      <Suspense fallback={<div>loading</div>}>
+        {renderRoutes(routes)}
+      </Suspense>
+    </BrowserRouter>
+  );
 });

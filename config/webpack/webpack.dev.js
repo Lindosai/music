@@ -43,6 +43,11 @@ module.exports = merge(common, {
   devServer: {
     open: true,
     port: 8000,
-    hot: true
+    hot: true,
+    client: {
+      logging: 'warn',
+      overlay: true
+    },
+    historyApiFallback: true // 解决单页面路由跳转 404 问题
   }
 });
