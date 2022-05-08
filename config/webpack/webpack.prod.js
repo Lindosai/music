@@ -7,6 +7,56 @@ const common = require('./webpack.common');
 module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
+  module: {
+    rules: [
+      {
+        test: /\.(htm|html)$/,
+        use: [
+          {
+            loader: 'html-loader',
+            options: {
+              minimize: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader'
+          },
+          {
+            loader: 'url-loader',
+            options: {
+              name: '[name]_[hash:4].[ext]',
+              limit: 500,
+              outputPath: 'images/',
+              esModule: false
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: 'file-loader'
+      },
+      {
+        test: /\.(js|jsx)?$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
+      },
+      {
+        test: /\.[jt]sx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: require.resolve('ts-loader'),
+          },
+        ],
+      },
+    ]
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({

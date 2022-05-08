@@ -7,16 +7,12 @@ module.exports = {
   },
   output: {
     filename: '[name].[chunkhash].js',
-    path: path.resolve(__dirname, '../../dist')
+    path: path.resolve(__dirname, '../../dist'),
+    publicPath: '/'
   },
   module: {
     rules: [
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
-      }
+      
     ]
   },
   plugins: [

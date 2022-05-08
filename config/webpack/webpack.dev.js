@@ -1,44 +1,48 @@
 const webpack = require('webpack');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const ReactRefreshTypeScript = require('react-refresh-typescript');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 
 module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
+  output: {
+    assetModuleFilename: 'images/[hash][ext][query]'
+  },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)?$/,
-        exclude: /node_modules/,
-        use: 'babel-loader'
+        test: /\.(htm|html)$/,
+        use: 'html-loader'
       },
       {
-        test: /\.[jt]sx?$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: require.resolve('ts-loader'),
-            options: {
-              getCustomTransformers: () => ({
-                before: [ReactRefreshTypeScript()].filter(Boolean),
-              }),
-              transpileOnly: true,
-            },
-          },
-        ],
+        test: /\.(png|svg|jpg|gif)$/,
+        type: 'asset/resource'
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        type: 'asset/resource'
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.(js|jsx|ts|tsx)?$/,
+        exclude: /node_modules/,
+        use: 'babel-loader'
+      }
     ]
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
-    }),
-    new ReactRefreshWebpackPlugin()
+    })
   ],
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ]
+    extensions: ['.tsx', '.jsx', '.ts', '.js']
   },
   devServer: {
     open: true,
@@ -48,6 +52,6 @@ module.exports = merge(common, {
       logging: 'warn',
       overlay: true
     },
-    historyApiFallback: true // 解决单页面路由跳转 404 问题
+    historyApiFallback: true, // 解决单页面路由跳转 404 问题
   }
 });

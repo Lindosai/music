@@ -1,5 +1,4 @@
-@import '~antd/dist/antd.css';
-@import "~normalize.css";
+@import '~normalize.css';
 
 /* 样式的重置 */
 body, html, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, header, menu, section, p, input, td, th, ins {
@@ -116,16 +115,6 @@ body, textarea, select, input, button {
   bottom: 0;
   text-indent: -9999px;
   background: url(../img/sprite_cover.png) no-repeat -145px -57px;
-}
-
-
-.ant-message .ant-message-notice-content {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 60px;
-  background-color: rgba(0, 0, 0, .5);
-  color: #fff;
 }
 
 span:hover.link {

@@ -3,16 +3,18 @@ import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 export default function request(option: AxiosRequestConfig) {
   return new Promise((resolve, reject) => {
     const instance = axios.create({
-      baseURL: '',
+      baseURL: 'http://123.207.32.32:9001/',
       timeout: 5000
     });
 
+    // 请求拦截
     instance.interceptors.request.use((config: AxiosRequestConfig) => {
       return config;
     }, (e: AxiosError) => {
       return e;
     });
 
+    // 响应拦截
     instance.interceptors.response.use((res: AxiosResponse) => {
       return res.data;
     }, (e: AxiosError) => {
