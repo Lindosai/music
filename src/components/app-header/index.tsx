@@ -1,7 +1,15 @@
 import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
+import SearchIcon from '@mui/icons-material/Search';
 import { headerLinks, IHeaderLink } from '@/services/local-data';
-import { AppHeaderWrapper, HeaderLeft, HeaderRight } from './style';
+import {
+  AppHeaderWrapper,
+  HeaderLeft,
+  HeaderRight,
+  Search,
+  SearchIconWrapper,
+  StyledInputBase
+} from './style';
 
 export default memo(function AppHeader() {
   const showItem = (item: IHeaderLink, index: number) => {
@@ -35,7 +43,15 @@ export default memo(function AppHeader() {
           </div>
         </HeaderLeft>
         <HeaderRight>
-          {/* <Input className="search" placeholder="音乐/视频/电台/用户" prefix={<SearchOutlined />} /> */}
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="音乐/视频/电台/用户"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
           <div className="center">创作者中心</div>
           <div className="">登录</div>
         </HeaderRight>

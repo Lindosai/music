@@ -3,6 +3,11 @@ export interface IHeaderLink {
   link: string
 };
 
+export interface IFooterLink {
+  title: string,
+  link: string
+};
+
 export const headerLinks = [
   {
     title: '发现音乐',

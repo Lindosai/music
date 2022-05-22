@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import InputBase from '@mui/material/InputBase';
+import { styled as muiStyled, alpha } from '@mui/material/styles';
 
 export const AppHeaderWrapper = styled.div`
   height: 75px;
@@ -16,8 +18,6 @@ export const AppHeaderWrapper = styled.div`
     background-color: #C20C0C;
   }
 `;
-
-
 
 export const HeaderLeft = styled.div`
   display: flex;
@@ -83,18 +83,6 @@ export const HeaderRight = styled.div`
   color: #ccc;
   font-size: 12px;
 
-  .search {
-    width: 158px;
-    height: 32px;
-    border-radius: 16px;
-
-    input {
-      &::placeholder {
-        font-size: 12px;
-      }
-    }
-  }
-
   .center {
     width: 90px;
     height: 32px;
@@ -102,6 +90,47 @@ export const HeaderRight = styled.div`
     text-align: center;
     border: 1px solid #666;
     border-radius: 16px;
-    margin: 0 16px;
+    margin-right: 16px;
   }
 `;
+
+export const Search = muiStyled('div')(({ theme }: any) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(3),
+    width: 'fit-content',
+  },
+}));
+
+export const SearchIconWrapper = muiStyled('div')(({ theme }: any) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+export const StyledInputBase = muiStyled(InputBase)(({ theme }: any) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    fontSize: '12px',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    }
+  },
+}));
