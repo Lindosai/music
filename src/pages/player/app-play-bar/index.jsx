@@ -4,7 +4,7 @@ import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import Slider from '@mui/material/Slider';
 import { getPlayUrl, formatMinuteSecond } from '@/utils/format-utils';
 import message from '@/components/message';
-// import AppPlayPanel from '../app-play-panel'
+import AppPlayPanel from '../app-play-panel'
 
 import { 
   getSongDetailAction, 
@@ -168,7 +168,7 @@ export default memo(function AppPlaybar() {
         </Operator>
       </div>
       <audio ref={audioRef} onTimeUpdate={timeUpdate} onEnded={timeEnded} />
-      {/* {showPanel && <AppPlayPanel />} */}
+      {showPanel && <AppPlayPanel />}
     </PlaybarWrapper>
   )
 })
