@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 import InputBase from '@mui/material/InputBase';
 import { styled as muiStyled, alpha } from '@mui/material/styles';
+import image from '../../assets/img/sprite_01.png';
 
-export const AppHeaderWrapper = styled.div`
+const AppHeaderWrapper = styled.div`
   height: 75px;
   background-color: #242424;
   font-size: 14px;
@@ -19,7 +20,7 @@ export const AppHeaderWrapper = styled.div`
   }
 `;
 
-export const HeaderLeft = styled.div`
+const HeaderLeft = styled.div`
   display: flex;
 
   .logo {
@@ -50,7 +51,7 @@ export const HeaderLeft = styled.div`
           content: "";
           width: 28px;
           height: 19px;
-          background-image: url(${require("@/assets/img/sprite_01.png")});
+          background-image: url(${image});
           background-position: -190px 0;
           top: 20px;
           right: -15px;
@@ -77,7 +78,7 @@ export const HeaderLeft = styled.div`
   }
 `;
 
-export const HeaderRight = styled.div`
+const HeaderRight = styled.div`
   display: flex;
   align-items: center;
   color: #ccc;
@@ -94,7 +95,7 @@ export const HeaderRight = styled.div`
   }
 `;
 
-export const Search = muiStyled('div')(({ theme }: any) => ({
+const Search = muiStyled('div')(({ theme }: any) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -110,7 +111,7 @@ export const Search = muiStyled('div')(({ theme }: any) => ({
   },
 }));
 
-export const SearchIconWrapper = muiStyled('div')(({ theme }: any) => ({
+const SearchIconWrapper = muiStyled('div')(({ theme }: any) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
   position: 'absolute',
@@ -120,7 +121,7 @@ export const SearchIconWrapper = muiStyled('div')(({ theme }: any) => ({
   justifyContent: 'center',
 }));
 
-export const StyledInputBase = muiStyled(InputBase)(({ theme }: any) => ({
+const StyledInputBase = muiStyled(InputBase)(({ theme }: any) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
@@ -134,3 +135,12 @@ export const StyledInputBase = muiStyled(InputBase)(({ theme }: any) => ({
     }
   },
 }));
+
+export {
+  AppHeaderWrapper,
+  HeaderLeft,
+  HeaderRight,
+  Search,
+  SearchIconWrapper,
+  StyledInputBase
+};

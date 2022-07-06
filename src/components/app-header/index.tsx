@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { NavLink } from 'react-router-dom';
-import SearchIcon from '@mui/icons-material/Search';
+// import SearchIcon from '@mui/icons-material/Search';
 import { headerLinks, IHeaderLink } from '@/services/local-data';
 import {
   AppHeaderWrapper,
@@ -45,7 +45,7 @@ export default memo(function AppHeader() {
         <HeaderRight>
           <Search>
             <SearchIconWrapper>
-              <SearchIcon />
+              {/* <SearchIcon /> */}
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="音乐/视频/电台/用户"
@@ -53,7 +53,7 @@ export default memo(function AppHeader() {
             />
           </Search>
           <div className="center">创作者中心</div>
-          <div className="">登录</div>
+          <div className="login">登录</div>
         </HeaderRight>
       </div>
       <div className="divider"></div>

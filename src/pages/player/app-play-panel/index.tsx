@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-
 import PlayHeader from './c-cpns/play-header';
 import PlayList from './c-cpns/play-list';
 import LyricPanel from './c-cpns/lyric-panel';

@@ -5,6 +5,7 @@ const Discover = React.lazy(() => import('../pages/discover'));
 const Player = React.lazy(() => import('../pages/player'));
 const Friend = React.lazy(() => import('../pages/friend'));
 const Mine = React.lazy(() => import('../pages/mine'));
+const Recommend = React.lazy(() => import('../pages/discover/c-pages/recommend'));
 
 export default [
   {
@@ -17,15 +18,19 @@ export default [
   {
     path: '/discover',
     component: Discover,
-    // routes: [
-    //   {
-    //     path: '/discover',
-    //     exact: true,
-    //     render: () => (
-    //       <Redirect to={"/discover/artist"} />
-    //     )
-    //   },
-    // ]
+    routes: [
+      {
+        path: '/discover',
+        exact: true,
+        render: () => (
+          <Redirect to={"/discover/recommend"}/>
+        )
+      },
+      {
+        path: '/discover/recommend',
+        component: Recommend
+      },
+    ]
   },
   {
     path: '/player',

@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
@@ -7,58 +8,54 @@ const common = require('./webpack.common');
 module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
+  entry: {
+    vendors: ['react']
+  },
   module: {
     rules: [
       {
-        test: /\.(htm|html)$/,
+        test: /style.(j|t)s$/,
         use: [
           {
-            loader: 'html-loader',
-            options: {
-              minimize: true
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader'
+            loader: MiniCssExtractPlugin.loader,
           },
           {
-            loader: 'url-loader',
+            loader: 'css-loader',
             options: {
-              name: '[name]_[hash:4].[ext]',
-              limit: 500,
-              outputPath: 'images/',
-              esModule: false
+              esModule: true,
+              sourceMap: true,
+              importLoaders: 1
             }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              execute: true,
+              postcssOptions: (loaderContext) => {
+                return {
+                  parser: 'postcss-js',
+                  plugins: [
+                    require('cssnano')(),
+                    require('autoprefixer')(),
+                    require('postcss-import')({ root: loaderContext.resourcePath })
+                  ]
+                };
+              },
+            }
+          },
+          {
+            loader: 'babel-loader',
           }
         ]
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: 'file-loader'
-      },
-      {
-        test: /\.(js|jsx)?$/,
-        exclude: /node_modules/,
-        use: 'babel-loader'
-      },
-      {
-        test: /\.[jt]sx?$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: require.resolve('ts-loader'),
-          },
-        ],
-      },
+      }
     ]
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash:10].css',
+      chunkFilename: '[id].[contenthash:10].css',
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
@@ -76,18 +73,35 @@ module.exports = merge(common, {
       enforceSizeThreshold: 50000, // 强制分割的大小阈值 50k
       cacheGroups: { // 缓存组
         // 打包第三方库
-        defaultVendors: {
+        vendors: {
           test: /[\\/]node_modules[\\/]/, // 正则匹配第三方库文件
           priority: -10, // 优先级
           reuseExistingChunk: true, // 如果一个模块已经被打包过了，那么这个模块也不会被打包
         },
         // 打包公共模块
-        default: {
+        common: {
           minChunks: 2, // 被超过两个模块引用，才会被打包
           priority: -20, // 优先级
           reuseExistingChunk: true, // 如果一个模块已经被打包过了，那么这个模块也不会被打包
         },
+        styles: {
+          name: 'styles',
+          type: 'css/mini-extract',
+          chunks: 'all',
+          enforce: true,
+        },
       },
     },
+  },
+  performance: {
+    hints:'warning',
+    // 入口起点的最大体积 整数类型（以字节为单位）
+    maxEntrypointSize: 50000000,
+    // 生成文件的最大体积 整数类型（以字节为单位 300k）
+    maxAssetSize: 30000000,
+    // 只给出 js 文件的性能提示
+    assetFilter: function(assetFilename) {
+      return assetFilename.endsWith('.js');
+    }
   }
 });

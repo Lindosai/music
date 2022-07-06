@@ -12,7 +12,7 @@ import {
   FooterRight
 } from "./style";
 
-export default memo(function HYAppFooter() {
+export default memo(function AppFooter() {
   return (
     <AppFooterWrapper>
       <div className="wrap-v2 content">
